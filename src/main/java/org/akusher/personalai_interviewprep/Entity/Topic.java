@@ -3,6 +3,10 @@ package org.akusher.personalai_interviewprep.Entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Table(name = "topics")
@@ -16,11 +20,14 @@ public class Topic {
     @NotBlank
     @Column(nullable = false)
     private String description;
-    private int created_at;
+    private LocalDateTime created_at;
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Question> questions = new ArrayList<>();
+
 
     public Topic() {
     }
-    public Topic(String name, String description, int created_at) {
+    public Topic(String name, String description, LocalDateTime created_at) {
         this.name = name;
         this.description = description;
         this.created_at = created_at;
@@ -50,11 +57,11 @@ public class Topic {
         this.description = description;
     }
 
-    public int getCreated_at() {
+    public LocalDateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(int created_at) {
+    public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
     }
 }

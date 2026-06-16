@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-create-answers
+      author: akusher
+      changes:
+        - createTable:
+            tableName: answers
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: question_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: answer_text
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ai_score
+                  type: DOUBLE
+              - column:
+                  name: ai_feedback
+                  type: TEXT
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - addForeignKeyConstraint:
+            baseTableName: answers
+            baseColumnNames: question_id
+            referencedTableName: questions
+            referencedColumnNames: id
+            onDelete: CASCADE

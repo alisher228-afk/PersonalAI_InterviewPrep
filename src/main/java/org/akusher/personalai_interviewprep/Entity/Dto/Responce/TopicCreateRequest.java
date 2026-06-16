@@ -1,6 +1,8 @@
 package org.akusher.personalai_interviewprep.Entity.Dto.Responce;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record TopicCreateRequest(
-        Long id
-) {
-}
+        @NotBlank String name,
+        String description
+) {}

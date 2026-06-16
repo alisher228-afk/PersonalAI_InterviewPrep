@@ -18,6 +18,7 @@ public class Question {
     private Topic topic;
     @NotNull
     private String text;
+    @Enumerated(EnumType.STRING)
     private Difficult difficulty;
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Answer> answers = new ArrayList<>();

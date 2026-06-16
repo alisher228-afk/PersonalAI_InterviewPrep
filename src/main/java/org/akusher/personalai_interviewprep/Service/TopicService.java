@@ -1,5 +1,6 @@
 package org.akusher.personalai_interviewprep.Service;
 
+import jakarta.validation.Valid;
 import org.akusher.personalai_interviewprep.Entity.Dto.Responce.TopicCreateRequest;
 import org.akusher.personalai_interviewprep.Entity.Dto.Responce.TopicCreateResponse;
 import org.akusher.personalai_interviewprep.Entity.Dto.Responce.TopicListResponse;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class TopicService {
@@ -33,7 +36,7 @@ public class TopicService {
         return topicMapper.toTopicCreateResponse(topic);
     }
 
-    public Page<TopicListResponse> getTopics(int page, int size) {
+    public Page<TopicListResponse> getTopics( int page, int size) {
         log.info("Getting Topic list of size {}", size);
         Pageable pageable = PageRequest.of(page, size);
         return topicRepository.findAll(pageable).map(topicMapper::toTopicListResponse);
@@ -46,12 +49,13 @@ public class TopicService {
                 .orElseThrow(() -> new RuntimeException("Topic not found with id: " + id));
     }
 
-    public TopicListResponse updateTopic(TopicCreateRequest request) {
-        log.info("Updating Topic with name {}", request.name());
-        Topic topic = new Topic();
+    public TopicListResponse updateTopic(Long id, TopicCreateRequest request) {
+        log.info("Updating Topic with id {}", id);
+        Topic topic = topicRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Topic not found with id: " + id));
         topic.setName(request.name());
         topic.setDescription(request.description());
-        topicRepository.save(topic);
+        topicRepository.save(topic); // теперь UPDATE, т.к. id уже есть
         return topicMapper.toTopicListResponse(topic);
     }
 

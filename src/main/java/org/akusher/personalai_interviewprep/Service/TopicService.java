@@ -1,6 +1,6 @@
 package org.akusher.personalai_interviewprep.Service;
 
-import jakarta.validation.Valid;
+import jakarta.persistence.EntityNotFoundException;
 import org.akusher.personalai_interviewprep.Entity.Dto.Responce.TopicCreateRequest;
 import org.akusher.personalai_interviewprep.Entity.Dto.Responce.TopicCreateResponse;
 import org.akusher.personalai_interviewprep.Entity.Dto.Responce.TopicListResponse;
@@ -13,8 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class TopicService {
@@ -46,23 +44,23 @@ public class TopicService {
         log.info("Getting Topic with id {}", id);
         return topicRepository.findById(id)
                 .map(topicMapper::toTopicListResponse)
-                .orElseThrow(() -> new RuntimeException("Topic not found with id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Topic not found with id: " + id));
     }
 
     public TopicListResponse updateTopic(Long id, TopicCreateRequest request) {
         log.info("Updating Topic with id {}", id);
         Topic topic = topicRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Topic not found with id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Topic not found with id: " + id));
         topic.setName(request.name());
         topic.setDescription(request.description());
-        topicRepository.save(topic); // теперь UPDATE, т.к. id уже есть
+        topicRepository.save(topic);
         return topicMapper.toTopicListResponse(topic);
     }
 
     public TopicListResponse deleteTopicById(Long id) {
         log.info("Deleting Topic with id {}", id);
         var topic = topicRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Topic not found with id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Topic not found with id: " + id));
         topicRepository.delete(topic);
         return topicMapper.toTopicListResponse(topic);
     }

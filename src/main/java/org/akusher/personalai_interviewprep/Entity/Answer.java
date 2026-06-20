@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @JoinColumn(name = "question_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Question question;
@@ -19,7 +19,7 @@ public class Answer {
     private LocalDateTime created_at;
 
     public Answer() {}
-    public Answer(int id, Question question, String answer_text, double ai_score, String ai_feedback, LocalDateTime created_at) {
+    public Answer(Long id, Question question, String answer_text, double ai_score, String ai_feedback, LocalDateTime created_at) {
         this.id = id;
         this.question = question;
         this.answer_text = answer_text;
@@ -28,11 +28,11 @@ public class Answer {
         this.created_at = created_at;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

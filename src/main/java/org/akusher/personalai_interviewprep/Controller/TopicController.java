@@ -1,9 +1,9 @@
 package org.akusher.personalai_interviewprep.Controller;
 
 import jakarta.validation.Valid;
-import org.akusher.personalai_interviewprep.Entity.Dto.Responce.TopicCreateRequest;
-import org.akusher.personalai_interviewprep.Entity.Dto.Responce.TopicCreateResponse;
-import org.akusher.personalai_interviewprep.Entity.Dto.Responce.TopicListResponse;
+import org.akusher.personalai_interviewprep.Entity.Dto.Topic.TopicRequest.TopicCreateRequest;
+import org.akusher.personalai_interviewprep.Entity.Dto.Topic.TopicResponce.TopicCreateResponse;
+import org.akusher.personalai_interviewprep.Entity.Dto.Topic.TopicResponce.TopicListResponse;
 import org.akusher.personalai_interviewprep.Service.TopicService;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;

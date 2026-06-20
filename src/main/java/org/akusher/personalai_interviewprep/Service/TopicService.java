@@ -1,9 +1,9 @@
 package org.akusher.personalai_interviewprep.Service;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.akusher.personalai_interviewprep.Entity.Dto.Responce.TopicCreateRequest;
-import org.akusher.personalai_interviewprep.Entity.Dto.Responce.TopicCreateResponse;
-import org.akusher.personalai_interviewprep.Entity.Dto.Responce.TopicListResponse;
+import org.akusher.personalai_interviewprep.Entity.Dto.Topic.TopicRequest.TopicCreateRequest;
+import org.akusher.personalai_interviewprep.Entity.Dto.Topic.TopicResponce.TopicCreateResponse;
+import org.akusher.personalai_interviewprep.Entity.Dto.Topic.TopicResponce.TopicListResponse;
 import org.akusher.personalai_interviewprep.Entity.Topic;
 import org.akusher.personalai_interviewprep.Entity.mapper.TopicMapper;
 import org.akusher.personalai_interviewprep.Entity.repository.TopicRepository;

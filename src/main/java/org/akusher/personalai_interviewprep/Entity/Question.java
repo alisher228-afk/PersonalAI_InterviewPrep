@@ -17,6 +17,7 @@ public class Question {
     @ManyToOne(fetch = FetchType.LAZY)
     private Topic topic;
     @NotNull
+    @Column(name = "question_text", nullable = false)
     private String text;
     @Enumerated(EnumType.STRING)
     private Difficult difficulty;

@@ -22,6 +22,9 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: difficulty
+                  type: VARCHAR(20)
+              - column:
                   name: created_at
                   type: TIMESTAMP
                   defaultValueComputed: CURRENT_TIMESTAMP

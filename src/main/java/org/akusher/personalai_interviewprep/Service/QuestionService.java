@@ -52,4 +52,22 @@ public class QuestionService {
                 .orElseThrow(() -> new EntityNotFoundException("Question not found with id: " + questionId));
         return questionMapper.toQuestionListResponse(question);
     }
+
+    public QuestionListResponse updateQuestion(Long questionId, QuestionCreateRequest request) {
+        Question question = questionRepository.findById(questionId)
+                .orElseThrow(() -> new EntityNotFoundException("Question not found with id: " + questionId));
+
+        question.setText(request.text());
+        question.setDifficulty(request.difficulty());
+        questionRepository.save(question);
+
+        return questionMapper.toQuestionListResponse(question);
+    }
+
+    public QuestionListResponse deleteQuestionById(Long questionId) {
+        Question question = questionRepository.findById(questionId)
+                .orElseThrow(() -> new EntityNotFoundException("Question not found with id: " + questionId));
+        questionRepository.delete(question);
+        return questionMapper.toQuestionListResponse(question);
+    }
 }

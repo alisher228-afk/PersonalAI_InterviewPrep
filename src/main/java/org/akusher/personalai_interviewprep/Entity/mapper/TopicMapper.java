@@ -5,7 +5,7 @@ import org.akusher.personalai_interviewprep.Entity.Dto.Topic.TopicResponce.Topic
 import org.akusher.personalai_interviewprep.Entity.Topic;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface TopicMapper {
     TopicListResponse toTopicListResponse(Topic topic);
 

@@ -29,6 +29,7 @@ databaseChangeLog:
                   type: TIMESTAMP
                   defaultValueComputed: CURRENT_TIMESTAMP
         - addForeignKeyConstraint:
+            constraintName: fk_questions_topic_id
             baseTableName: questions
             baseColumnNames: topic_id
             referencedTableName: topics

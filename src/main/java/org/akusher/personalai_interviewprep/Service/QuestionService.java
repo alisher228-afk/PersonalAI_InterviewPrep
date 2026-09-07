@@ -39,7 +39,7 @@ public class QuestionService {
     }
 
     public List<QuestionListResponse> getQuestionsByTopicId(Long topicId) {
-        Topic topic = topicRepository.findById(topicId)
+        topicRepository.findById(topicId)
                 .orElseThrow(() -> new EntityNotFoundException("Topic not found with id: " + topicId));
 
         List<Question> questions = questionRepository.findByTopicId(topicId);

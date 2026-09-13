@@ -1,31 +1,48 @@
 package org.akusher.personalai_interviewprep.Entity;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "answers")
 public class Answer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @JoinColumn(name = "question_id", nullable = false)
+
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "question_id", nullable = false)
     private Question question;
-    private String answer_text;
-    private double ai_score;
-    private String ai_feedback;
-    private LocalDateTime created_at;
+
+    @Column(name = "answer_text", nullable = false, columnDefinition = "TEXT")
+    private String answerText;
+
+    @Column(name = "ai_score")
+    private Double aiScore;
+
+    @Column(name = "ai_feedback", columnDefinition = "TEXT")
+    private String aiFeedback;
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.createdAt == null) {
+            this.createdAt = LocalDateTime.now();
+        }
+    }
 
     public Answer() {}
-    public Answer(Long id, Question question, String answer_text, double ai_score, String ai_feedback, LocalDateTime created_at) {
+
+    public Answer(Long id, Question question, String answerText, Double aiScore, String aiFeedback, LocalDateTime createdAt) {
         this.id = id;
         this.question = question;
-        this.answer_text = answer_text;
-        this.ai_score = ai_score;
-        this.ai_feedback = ai_feedback;
-        this.created_at = created_at;
+        this.answerText = answerText;
+        this.aiScore = aiScore;
+        this.aiFeedback = aiFeedback;
+        this.createdAt = createdAt;
     }
 
     public Long getId() {
@@ -44,35 +61,35 @@ public class Answer {
         this.question = question;
     }
 
-    public String getAnswer_text() {
-        return answer_text;
+    public String getAnswerText() {
+        return answerText;
     }
 
-    public void setAnswer_text(String answer_text) {
-        this.answer_text = answer_text;
+    public void setAnswerText(String answerText) {
+        this.answerText = answerText;
     }
 
-    public double getAi_score() {
-        return ai_score;
+    public Double getAiScore() {
+        return aiScore;
     }
 
-    public void setAi_score(double ai_score) {
-        this.ai_score = ai_score;
+    public void setAiScore(Double aiScore) {
+        this.aiScore = aiScore;
     }
 
-    public String getAi_feedback() {
-        return ai_feedback;
+    public String getAiFeedback() {
+        return aiFeedback;
     }
 
-    public void setAi_feedback(String ai_feedback) {
-        this.ai_feedback = ai_feedback;
+    public void setAiFeedback(String aiFeedback) {
+        this.aiFeedback = aiFeedback;
     }
 
-    public LocalDateTime getCreated_at() {
-        return created_at;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(LocalDateTime created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
